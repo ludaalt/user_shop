@@ -1,5 +1,14 @@
-import { useState } from "react";
+import { FC, useState, useEffect } from "react";
 import styled from "styled-components";
+
+import { IBrand } from "../types/types";
+
+type Props = {
+  item: IBrand;
+  addBrand: (brand: string) => void;
+  deleteBrand: (brand: string) => void;
+  filteredBrands: string[];
+};
 
 const StyledLabel = styled.label`
   display: inline-block;
@@ -13,18 +22,27 @@ const StyledLabel = styled.label`
   }
 `;
 
-const CheckBox = ({ item, addBrand, deleteBrand }: any) => {
+const CheckBox: FC<Props> = ({
+  item,
+  addBrand,
+  deleteBrand,
+  filteredBrands,
+}) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const checkboxHandleChange = () => {
     if (!isChecked) {
       addBrand(item.title);
+      setIsChecked(true);
     } else {
       deleteBrand(item.title);
+      setIsChecked(false);
     }
-
-    setIsChecked((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (filteredBrands.length === 0) setIsChecked(false);
+  }, [filteredBrands]);
 
   return (
     <StyledLabel>
