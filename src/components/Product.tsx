@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 
 import Button from "./Button";
+import { IProductItem } from "../types/types";
+
+type Props = {
+  item: IProductItem;
+};
 
 const StyledButton = styled(Button)<{ countInCart: number }>`
   margin: 10px 0;
@@ -38,7 +43,7 @@ const ChangeCountButton = styled.button<{ countInCart: number }>`
   display: ${(props) => (props.countInCart === 0 ? `none` : `block`)};
 `;
 
-const Product = ({ item }: any) => {
+const Product: FC<Props> = ({ item }) => {
   const [countInCart, setCountInCart] = useState<number>(0);
 
   return (
