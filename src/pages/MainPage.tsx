@@ -14,22 +14,23 @@ const AppContainer = styled.div`
 `;
 
 const App = () => {
-  const [filteredBrands, setFilteredBrands] = useState<string[]>([]);
+  const [filteredBrands, setFilteredBrands] = useState<number[]>([]);
 
   const [visibleProducts, setVisibleProducts] =
     useState<IProductItem[]>(products);
 
   const showFiltered = () => {
     setVisibleProducts(
-      products.filter((item: IProductItem) =>
-        filteredBrands.includes(item.brand.toString())
-      )
+      products.filter((item: IProductItem) => {
+        console.log(typeof item.brand);
+        return filteredBrands.includes(item.brand);
+      })
     );
   };
 
   const showProducts = () => {
     setVisibleProducts(products);
-    setFilteredBrands((a: any) => a.splice(0, a.length));
+    setFilteredBrands((a: number[]) => a.splice(0, a.length));
   };
 
   return (
