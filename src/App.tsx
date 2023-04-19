@@ -1,52 +1,27 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
-import Aside from "./components/Aside";
-import ProductList from "./components/ProductList";
-import { products } from "./data/products";
+import MainPage from "./pages/MainPage";
+import CartPage from "./pages/CartPage";
 
-const AppContainer = styled.div`
-  padding: 20px 5px;
+import ProductsProvider from "./context/context";
 
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-`;
-
-const App = () => {
-  const [isFiltered, setIsFiltered] = useState(false);
-  const [filteredBrands, setFilteredBrands] = useState<any>([]);
-
-  console.log(isFiltered);
-
-  const [visibleProducts, setVisibleProducts] = useState<any>(products);
-
-  const showFiltered = () => {
-    // console.log(999);
-    if (filteredBrands.length > 0) {
-      // console.log(111);
-      setVisibleProducts((prev: any) =>
-        products.filter((item: any) => filteredBrands.includes(item.brand))
-      );
-    }
-    if (filteredBrands.length === 0) {
-      // console.log(333);
-      setVisibleProducts(products);
-    }
-  };
-
-  useEffect(() => {
-    showFiltered();
-  }, [isFiltered]);
-
+const App: React.FC = () => {
   return (
-    <AppContainer>
-      <Aside {...{ setFilteredBrands, setIsFiltered, showFiltered }} />
-      <ProductList
-        filteredBrands={filteredBrands}
-        isFiltered={isFiltered}
-        visibleProducts={visibleProducts}
-      />
-    </AppContainer>
+    <ProductsProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/products" />} />
+          <Route path="/products" element={<MainPage />} />
+          <Route path={"/cart"} element={<CartPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Router>
+    </ProductsProvider>
   );
 };
 
