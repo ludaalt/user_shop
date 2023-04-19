@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: monospace;
   }
 
   ul {
@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     border: none;
     background: none;
+    font: inherit;
   }
 `;
 
