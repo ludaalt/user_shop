@@ -11,7 +11,7 @@ type Props = {
   setFilteredBrands: Function;
   showFiltered: () => void;
   showProducts: () => void;
-  filteredBrands: string[];
+  filteredBrands: number[];
 };
 
 const StyledAside = styled.aside`
@@ -52,16 +52,6 @@ const Aside: FC<Props> = ({
       });
     });
   };
-
-  // const deleteBrand = (value: string) => {
-  //   setFilteredBrands((prev: number[]) => {
-  //     return [].concat(
-  //       ...prev.filter((item: any) => {
-  //         return item !== +value.split(" ")[1];
-  //       })
-  //     );
-  //   });
-  // };
 
   const handleFiltering = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

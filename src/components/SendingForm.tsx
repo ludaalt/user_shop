@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "./Button";
 
 import { sendOrder } from "../services/sendOrder";
-import { IProductItem } from "../types/types";
+import { IProductItemInCart } from "../types/types";
 
 const StyledForm = styled.form`
   display: flex;
@@ -22,7 +22,7 @@ const StyledForm = styled.form`
 `;
 
 type Props = {
-  productsInCart: IProductItem[];
+  productsInCart: IProductItemInCart[];
   setIsModalShown: any;
 };
 

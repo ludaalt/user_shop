@@ -7,7 +7,7 @@ type Props = {
   item: IBrand;
   addBrand: (brand: string) => void;
   deleteBrand: (brand: string) => void;
-  filteredBrands: string[];
+  filteredBrands: number[];
 };
 
 const StyledLabel = styled.label`
