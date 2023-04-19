@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -7,6 +7,7 @@ import { ProductsContextType } from "../types/types";
 
 import Button from "../components/Button";
 import SendingForm from "../components/SendingForm";
+import Modal from "../components/Modal";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -34,6 +35,8 @@ const CartPage = () => {
     ProductsContext
   ) as ProductsContextType;
 
+  const [isModalShown, setIsModalShown] = useState(false);
+
   return (
     <div
       style={{
@@ -43,6 +46,7 @@ const CartPage = () => {
         alignItems: "flex-start",
       }}
     >
+      {isModalShown && <Modal setIsModalShown={setIsModalShown} />}
       <StyledLink to={"/products"}>
         <Button>К списку товаров</Button>
       </StyledLink>
@@ -78,7 +82,10 @@ const CartPage = () => {
         Всего к оплате:
         <br />
         <p style={{ fontSize: "30px", marginBottom: "70px" }}>{totalPrice}</p>
-        <SendingForm productsInCart={productsInCart} />
+        <SendingForm
+          setIsModalShown={setIsModalShown}
+          productsInCart={productsInCart}
+        />
       </div>
     </div>
   );

@@ -15,20 +15,25 @@ const StyledForm = styled.form`
     margin: 5px 0;
     padding: 5px;
     border-radius: 5px;
+
+    font: inherit;
+    font-size: 15px;
   }
 `;
 
 type Props = {
   productsInCart: IProductItem[];
+  setIsModalShown: any;
 };
 
-const SendingForm: FC<Props> = ({ productsInCart }) => {
+const SendingForm: FC<Props> = ({ productsInCart, setIsModalShown }) => {
   const [userData, setUserData] = useState({ name: "", tel: "" });
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     sendOrder({ ...userData, order: productsInCart });
 
     setUserData({ name: "", tel: "" });
+    setIsModalShown(true);
   };
 
   return (
@@ -39,6 +44,7 @@ const SendingForm: FC<Props> = ({ productsInCart }) => {
           type="text"
           placeholder="Имя"
           required
+          autoComplete="false"
           name="name"
           value={userData.name}
           onChange={(e) => setUserData({ ...userData, name: e.target.value })}
@@ -47,6 +53,7 @@ const SendingForm: FC<Props> = ({ productsInCart }) => {
           type="tel"
           placeholder="Телефон"
           required
+          autoComplete="false"
           name="tel"
           value={userData.tel}
           onChange={(e) => setUserData({ ...userData, tel: e.target.value })}
