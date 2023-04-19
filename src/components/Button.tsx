@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
   disabled?: boolean;
   type?: string;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const StyledButton = styled.button`
