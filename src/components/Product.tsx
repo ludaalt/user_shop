@@ -1,8 +1,10 @@
-import { FC, useState } from "react";
+import { FC, useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 
 import Button from "./Button";
-import { IProductItem } from "../types/types";
+import { IProductItem, ProductsContextType } from "../types/types";
+
+import { ProductsContext } from "../context/context";
 
 type Props = {
   item: IProductItem;
@@ -46,12 +48,24 @@ const ChangeCountButton = styled.button<{ countInCart: number }>`
 const Product: FC<Props> = ({ item }) => {
   const [countInCart, setCountInCart] = useState<number>(0);
 
+  const { buyProduct } = useContext(ProductsContext) as ProductsContextType;
+
+  useEffect(() => {
+    if (countInCart > 0) buyProduct(item, countInCart);
+  }, [countInCart]);
+
   return (
     <ProductItem>
       <img src={item.image} alt={item.title} height={300} />
       {item.title}
       <br />
       Brand: {item.brand}
+      <p style={{ fontSize: "22px" }}>
+        {item["regular_price"]["value"]}{" "}
+        <span style={{ textTransform: "uppercase" }}>
+          {item["regular_price"]["currency"]}
+        </span>
+      </p>
       <div
         style={{
           minWidth: "110px",
