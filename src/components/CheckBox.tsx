@@ -41,7 +41,7 @@ const CheckBox: FC<Props> = ({
   };
 
   useEffect(() => {
-    if (filteredBrands.length === 0) setIsChecked(false);
+    if (filteredBrands?.length === 0) setIsChecked(false);
   }, [filteredBrands]);
 
   return (

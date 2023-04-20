@@ -22,8 +22,7 @@ const App = () => {
   const showFiltered = () => {
     setVisibleProducts(
       products.filter((item: IProductItem) => {
-        console.log(typeof item.brand);
-        return filteredBrands.includes(item.brand);
+        return filteredBrands && filteredBrands.includes(item.brand);
       })
     );
   };

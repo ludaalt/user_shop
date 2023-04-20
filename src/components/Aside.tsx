@@ -41,15 +41,19 @@ const Aside: FC<Props> = ({
 }) => {
   const addBrand = (value: string) => {
     setFilteredBrands((prev: number[]) => {
+      if (!prev) return [value];
       return [...prev].concat(+value.split(" ")[1]);
     });
   };
 
   const deleteBrand = (value: string) => {
     setFilteredBrands((prev: number[]) => {
-      prev.filter((item: number) => {
-        return item !== +value.split(" ")[1];
-      });
+      if (prev) {
+        prev.filter((item: number) => {
+          return item !== +value.split(" ")[1];
+        });
+      }
+      return [];
     });
   };
 
@@ -81,13 +85,13 @@ const Aside: FC<Props> = ({
 
         <div>
           <Button
-            disabled={filteredBrands.length === 0}
+            disabled={filteredBrands?.length === 0}
             onClick={handleFiltering}
           >
             Применить
           </Button>
           <Button
-            disabled={filteredBrands.length === 0}
+            disabled={filteredBrands?.length === 0}
             type="reset"
             onClick={handleResetFiltering}
           >
