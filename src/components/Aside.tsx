@@ -26,11 +26,15 @@ const StyledAside = styled.aside`
   ul {
     margin: 5px 0;
   }
+
+  @media (max-width: 560px) {
+    padding: 0px;
+  }
 `;
 
 const StyledLink = styled(Link)`
   display: inline-block;
-  margin: 30px 0;
+  margin-top: 30px;
 `;
 
 const Aside: FC<Props> = ({

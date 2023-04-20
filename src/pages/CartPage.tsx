@@ -12,21 +12,53 @@ import Modal from "../components/Modal";
 const StyledLink = styled(Link)`
   text-decoration: none;
   display: inline-block;
+  margin-right: 30px;
 `;
 
 const StyledTable = styled.table`
-  margin: 0 30px;
+  margin-bottom: 50px;
 
   td {
+    text-align: center;
     border: 1px solid #333;
-    padding: 10px 45px;
+    padding: 10px 40px;
+
+    @media (max-width: 700px) {
+      padding: 8px 10px;
+    }
 
     button {
       padding: 5px;
       border: 1px solid;
       border-radius: 50%;
       margin: 10px;
+
+      @media (max-width: 700px) {
+        border: 2px solid black;
+        display: block;
+      }
     }
+  }
+`;
+
+const StyledCart = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  align-items: flex-start;
+
+  @media (max-width: 1100px) {
+    flex-direction: column;
+    align-items: auto;
+  }
+`;
+
+const StyledPrice = styled.p`
+  font-size: 30px;
+  margin-bottom: 70px;
+
+  @media (max-width: 1100px) {
+    margin-bottom: 30px;
   }
 `;
 
@@ -38,14 +70,7 @@ const CartPage = () => {
   const [isModalShown, setIsModalShown] = useState(false);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-around",
-        margin: "20px",
-        alignItems: "flex-start",
-      }}
-    >
+    <StyledCart>
       {isModalShown && <Modal setIsModalShown={setIsModalShown} />}
       <StyledLink to={"/products"}>
         <Button>К списку товаров</Button>
@@ -81,13 +106,13 @@ const CartPage = () => {
       <div style={{ fontSize: "20px" }}>
         Всего к оплате:
         <br />
-        <p style={{ fontSize: "30px", marginBottom: "70px" }}>{totalPrice}</p>
+        <StyledPrice>{totalPrice}</StyledPrice>
         <SendingForm
           setIsModalShown={setIsModalShown}
           productsInCart={productsInCart}
         />
       </div>
-    </div>
+    </StyledCart>
   );
 };
 

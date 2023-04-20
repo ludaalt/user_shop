@@ -26,6 +26,12 @@ const Products = styled.ul`
       opacity: 1;
     }
   }
+
+  @media (max-width: 480px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 let PageSize = 6;

@@ -11,6 +11,12 @@ const AppContainer = styled.div`
 
   display: grid;
   grid-template-columns: 1fr 3fr;
+
+  @media (max-width: 480px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const App = () => {
