@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { FC, useState, useMemo, useEffect } from "react";
 import styled from "styled-components";
 
 import Product from "./Product";
+import Pagination from "./Pagination";
 import { IProductItem } from "../types/types";
 
 type Props = {
@@ -27,15 +28,37 @@ const Products = styled.ul`
   }
 `;
 
+let PageSize = 6;
+
 const ProductList: FC<Props> = ({ visibleProducts }) => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return visibleProducts.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, visibleProducts]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [visibleProducts]);
+
   return (
-    <Products>
-      {visibleProducts.map((item: IProductItem) => (
-        <li key={item.id}>
-          <Product item={item} />
-        </li>
-      ))}
-    </Products>
+    <div>
+      <Pagination
+        currentPage={currentPage}
+        totalCount={visibleProducts.length}
+        pageSize={PageSize}
+        onPageChange={(page: number) => setCurrentPage(page)}
+      />
+      <Products>
+        {currentTableData.map((item: IProductItem) => (
+          <li key={item.id}>
+            <Product item={item} />
+          </li>
+        ))}
+      </Products>
+    </div>
   );
 };
 
